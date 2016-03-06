@@ -1,7 +1,10 @@
 package com.rem.firm.firm;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +29,8 @@ public class EmployeeFragment extends Fragment {
     private Spinner spinnerSort;
     private ImageButton buttonUpdate;
     private Map<String, Comparator<Employee>> map = new HashMap<String, Comparator<Employee>>();
+    private ArrayList<Employee> employeeArrayList;
+    private ArrayAdapter<String> adapterList;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -78,29 +83,29 @@ public class EmployeeFragment extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
 
-        ArrayList<Employee> employeeArrayList = firm.getAllEmployees();
+        employeeArrayList = firm.getAllEmployees();
         String [] arrayEmployee = new String[employeeArrayList.size()];
         for (int i = 0; i < employeeArrayList.size(); i++) {
             arrayEmployee[i] = employeeArrayList.get(i).toString() + employeeArrayList.get(i).getClass().getSimpleName();
         }
-        final ArrayAdapter<String> adapterList = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1, arrayEmployee);
+        adapterList = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1, arrayEmployee);
         listViewEmployee.setAdapter(adapterList);
 
-//        listViewEmployee.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+        listViewEmployee.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                onClickAlertDialog(employeeArrayList.get(position));
+            }
+        });
 
         buttonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                employeeArrayList = firm.getAllEmployees();
                 listViewEmployee.setAdapter(adapterList);
             }
         });
@@ -109,8 +114,8 @@ public class EmployeeFragment extends Fragment {
         return rootView;
     }
 
-    private void onClickFireEmployee() {
-        firm.fireEmployee(null, null, null);
+    private void onClickFireEmployee(Employee employee) {
+        firm.fireEmployee(employee.getName(), employee.getSurname(), employee.getPatronymic());
     }
 
     private void onClickChangeDep() {
@@ -119,14 +124,33 @@ public class EmployeeFragment extends Fragment {
 
     private void onClickSort() {
         Comparator<Employee> comparator = map.get(spinnerSort.getSelectedItem().toString());
-//        firm.getAllEmployeesSorted(comparator);
 
-        ArrayList<Employee> employeeArrayList = firm.getAllEmployeesSorted(comparator);
+        employeeArrayList = firm.getAllEmployeesSorted(comparator);
         String[] arrayEmployee = new String[employeeArrayList.size()];
         for (int i = 0; i < employeeArrayList.size(); i++) {
             arrayEmployee[i] = employeeArrayList.get(i).toString();
         }
-        final ArrayAdapter<String> adapterList = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1, arrayEmployee);
+        adapterList = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1, arrayEmployee);
         listViewEmployee.setAdapter(adapterList);
+    }
+
+    private void onClickAlertDialog(final Employee employee) {
+        Context context = this.getContext();
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+
+        alertDialog.setPositiveButton("Fire Employee", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                onClickFireEmployee(employee);
+
+            }
+        });
+
+//        alertDialog.setNegativeButton("Change Department", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//
+//            }
+//        });
     }
 }
