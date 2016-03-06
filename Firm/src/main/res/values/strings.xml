@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Firm</string>
+
+    <string name="title_section1">Firm</string>
+    <string name="title_section2">Emploeyy</string>
+    <string name="title_section3">Department</string>
+    <string name="title_section4">Add emploeyy</string>
+    <string name="action_settings">Settings</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="patronymic">Patronymic</string>
+    <string name="salary">Salary</string>
+    <string name="bankAccount">Sum on bank account</string>
+    <string name="rButtonWoman">Woman</string>
+    <string name="rButtonMan">Man</string>
+    <string name="buttonAdd">Add Employee</string>
+    <string name="editSum">Add money firm</string>
+    <string name="buttonAddMoney">Add money</string>
+    <string name="sumOnBank">Sum on bank account firm</string>
+    <string name="buttonGiveSalary">Give salary</string>
+    <string name="sellFor10">Sell for 10</string>
+    <string name="imageButtonUpdate">update</string>
+    <string name="buttonSort">Sort</string>
+    <string name="textDepartment">Departmant</string>
+</resources>

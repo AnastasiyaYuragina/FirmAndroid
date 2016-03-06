@@ -1,0 +1,68 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                tools:context=".MainActivity$FirmFragment"
+                android:background="#2e2e30">
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewBankAccount"
+            android:enabled="false"
+            android:background="#ffffff"
+            android:layout_below="@+id/textViewSumOnBank"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" android:textColor="#000000" android:textIsSelectable="false"
+            android:textSize="24dp"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/editSumToBA"
+            android:layout_marginTop="48dp"
+            android:textColor="#ffffff"
+            android:hint="@string/editSum"
+            android:layout_below="@+id/textViewBankAccount"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColorHint="#828282"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/buttonAddMoney"
+            android:id="@+id/buttonAddMoneyToFirm"
+            android:layout_alignTop="@+id/editSumToBA"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/sumOnBank"
+            android:id="@+id/textViewSumOnBank"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="#ffffff"
+            android:enabled="true"/>
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/buttonGiveSalary"
+            android:id="@+id/buttonGiveSalary"
+            android:layout_below="@+id/buttonAddMoneyToFirm" android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" android:layout_marginTop="43dp"/>
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sellFor10"
+            android:id="@+id/buttonSellFor10"
+            android:layout_below="@+id/buttonGiveSalary" android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" android:layout_marginTop="37dp"/>
+</RelativeLayout>
