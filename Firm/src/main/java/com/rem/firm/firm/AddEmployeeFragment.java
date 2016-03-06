@@ -59,7 +59,6 @@ public class AddEmployeeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.add_employee_tab, container, false);
 
-        addDepartment();
         editTextName = (EditText) rootView.findViewById(R.id.editName);
         editTextSurname = (EditText) rootView.findViewById(R.id.editSurname);
         editTextPatronymic = (EditText) rootView.findViewById(R.id.editPatronymic);
@@ -153,12 +152,6 @@ public class AddEmployeeFragment extends Fragment {
 
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
-    }
-
-    private void addDepartment() {
-        firm.addDepartment(new Department("IT"));
-        firm.addDepartment(new Department("Managers"));
-        firm.addDepartment(new Department("Sales"));
     }
 
 }

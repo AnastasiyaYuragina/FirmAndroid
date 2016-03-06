@@ -56,6 +56,7 @@ public class FirmFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.firm_tab, container, false);
+        addDepartment();
         textViewSumOnBankAccount = (TextView) view.findViewById(R.id.textViewBankAccount);
         buttonAddMoneyToFirm = (Button) view.findViewById(R.id.buttonAddMoneyToFirm);
         buttonGiveSalary = (Button)  view.findViewById(R.id.buttonGiveSalary);
@@ -91,5 +92,11 @@ public class FirmFragment extends Fragment {
         firm.addBankAccountFirm(Double.parseDouble(editTextAddMoneyToFirm.getText().toString()));
         editTextAddMoneyToFirm.setText("");
         textViewSumOnBankAccount.setText(firm.getBankAccountFirm());
+    }
+
+    private void addDepartment() {
+        firm.addDepartment(new Department("IT"));
+        firm.addDepartment(new Department("Managers"));
+        firm.addDepartment(new Department("Sales"));
     }
 }

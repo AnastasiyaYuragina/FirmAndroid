@@ -28,15 +28,22 @@
             android:id="@+id/spinnerDepartment" android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/textViewDepartment" android:layout_toLeftOf="@+id/imageButtonUpdateDep"
             android:layout_toStartOf="@+id/imageButtonUpdateDep"/>
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/buttonSort"
-            android:id="@+id/buttonSortDep" android:layout_below="@+id/imageButtonUpdateDep" android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"/>
     <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/listViewEmployeeDep" android:layout_below="@+id/buttonSortDep" android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"/>
+            android:id="@+id/listViewEmployeeDep" android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" android:layout_below="@+id/spinnerSortDep"/>
+    <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerSortDep"
+            android:layout_below="@+id/imageButtonUpdateDep" android:layout_alignParentEnd="true"
+            android:layout_alignStart="@+id/spinnerDepartment"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sort"
+            android:id="@+id/textView2" android:layout_above="@+id/listViewEmployeeDep"
+            android:layout_alignParentStart="true" android:layout_alignTop="@+id/spinnerSortDep"
+            android:layout_toStartOf="@+id/spinnerDepartment"/>
 </RelativeLayout>

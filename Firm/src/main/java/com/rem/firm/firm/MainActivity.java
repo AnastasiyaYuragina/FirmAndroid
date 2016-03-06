@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         setContentView(R.layout.activity_main);
 
         firm = new Firm("name", "form address", 100_000);
+
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -157,10 +158,8 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                     ((EmployeeFragment)fragment).setFirm(firm);
                     break;
                 case 2:
-                    fragment = new DepartmentFragment();
-                    args = new Bundle();
-                    args.putInt(DepartmentFragment.ARG_SECTION_NUMBER, position + 1);
-                    fragment.setArguments(args);
+                    fragment = DepartmentFragment.newInstance(position + 1);
+                    ((DepartmentFragment)fragment).setFirm(firm);
                     break;
                 case 3:
 
