@@ -4,15 +4,13 @@ package com.rem.firm.firm;
  * Created by Anastasiya on 3/4/2016.
  */
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.widget.*;
 
 import java.nio.BufferUnderflowException;
 
@@ -68,7 +66,7 @@ public class FirmFragment extends Fragment {
         buttonAddMoneyToFirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickAddMoneyToFirm();
+                addMoneyToFirm();
             }
         });
         buttonGiveSalary.setOnClickListener(new View.OnClickListener() {
@@ -88,10 +86,21 @@ public class FirmFragment extends Fragment {
         return view;
     }
 
-    private void onClickAddMoneyToFirm() {
-        firm.addBankAccountFirm(Double.parseDouble(editTextAddMoneyToFirm.getText().toString()));
-        editTextAddMoneyToFirm.setText("");
-        textViewSumOnBankAccount.setText(firm.getBankAccountFirm());
+    private void addMoneyToFirm() {
+        String sSum = editTextAddMoneyToFirm.getText().toString();
+        if (sSum.isEmpty()) {
+            Context context = this.getContext();
+            CharSequence text = "Add sum";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        } else {
+            double sum = Double.parseDouble(sSum);
+            firm.addBankAccountFirm(sum);
+            editTextAddMoneyToFirm.setText("");
+            textViewSumOnBankAccount.setText(firm.getBankAccountFirm());
+        }
     }
 
     private void addDepartment() {
