@@ -18,19 +18,17 @@ import java.util.Map;
 /**
  * Created by Anastasiya on 3/4/2016.
  */
-public class EmployeeFragment extends Fragment {
+public class EmployeeFragment extends ParentFragment {
     /**
      * The fragment argument representing the section number for this
      * fragment.
      */
     public static final String ARG_SECTION_NUMBER = "section_number";
     private Firm firm;
-    private ListView listViewEmployee;
     private Spinner spinnerSort;
     private ImageButton buttonUpdate;
     private Map<String, Comparator<Employee>> map = new HashMap<String, Comparator<Employee>>();
     private ArrayList<Employee> employeeArrayList;
-    private ArrayAdapter<String> adapterList;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -58,12 +56,13 @@ public class EmployeeFragment extends Fragment {
         listViewEmployee = (ListView) rootView.findViewById(R.id.listViewEmployeeFirm);
         buttonUpdate = (ImageButton) rootView.findViewById(R.id.imageButtonUpdate);
         spinnerSort = (Spinner) rootView.findViewById(R.id.spinnerSort);
-        map.put("name", Employee.SORT_BY_NAME);
-        map.put("surname", Employee.SORT_BY_SURNAME);
-        map.put("patronymic", Employee.SORT_BY_PATRONYMIC);
-        map.put("salary", Employee.SORT_BY_SALARY);
-        map.put("bank account", Employee.SORT_BY_BANK_ACCOUNT);
-        map.put("sex", Employee.SORT_BY_SEX);
+
+        map.put(ParentFragment.NAME, Employee.SORT_BY_NAME);
+        map.put(ParentFragment.SURNAME, Employee.SORT_BY_SURNAME);
+        map.put(ParentFragment.PATRONYMIC, Employee.SORT_BY_PATRONYMIC);
+        map.put(ParentFragment.SALARY, Employee.SORT_BY_SALARY);
+        map.put(ParentFragment.BANK_ACCOUNT, Employee.SORT_BY_BANK_ACCOUNT);
+        map.put(ParentFragment.SEX, Employee.SORT_BY_SEX);
 
         Object[] mapKey = map.keySet().toArray();
         String[] arrayMapKey = new String[mapKey.length];
@@ -78,7 +77,7 @@ public class EmployeeFragment extends Fragment {
         spinnerSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                onClickSort();
+                sortEmployees();
             }
 
             @Override
@@ -88,12 +87,7 @@ public class EmployeeFragment extends Fragment {
 
 
         employeeArrayList = firm.getAllEmployees();
-        String [] arrayEmployee = new String[employeeArrayList.size()];
-        for (int i = 0; i < employeeArrayList.size(); i++) {
-            arrayEmployee[i] = employeeArrayList.get(i).toString() + employeeArrayList.get(i).getClass().getSimpleName();
-        }
-        adapterList = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1, arrayEmployee);
-        listViewEmployee.setAdapter(adapterList);
+        updateListAdapter(employeeArrayList);
 
         listViewEmployee.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -106,12 +100,7 @@ public class EmployeeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 employeeArrayList = firm.getAllEmployees();
-                String [] arrayEmployee = new String[employeeArrayList.size()];
-                for (int i = 0; i < employeeArrayList.size(); i++) {
-                    arrayEmployee[i] = employeeArrayList.get(i).toString() + employeeArrayList.get(i).getClass().getSimpleName();
-                }
-                adapterList = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, arrayEmployee);
-                listViewEmployee.setAdapter(adapterList);
+                updateListAdapter(employeeArrayList);
             }
         });
 
@@ -121,49 +110,27 @@ public class EmployeeFragment extends Fragment {
     private void onClickFireEmployee(Employee employee) {
         firm.fireEmployee(employee.getName(), employee.getSurname(), employee.getPatronymic());
         employeeArrayList = firm.getAllEmployees();
-        String [] arrayEmployee = new String[employeeArrayList.size()];
-        for (int i = 0; i < employeeArrayList.size(); i++) {
-            arrayEmployee[i] = employeeArrayList.get(i).toString() + employeeArrayList.get(i).getClass().getSimpleName();
-        }
-        adapterList = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, arrayEmployee);
-        listViewEmployee.setAdapter(adapterList);
+        updateListAdapter(employeeArrayList);
     }
 
-    private void onClickChangeDep() {
-        firm.setDepartmentForEmployee(null, null, null, null);
-    }
-
-    private void onClickSort() {
+    private void sortEmployees() {
         Comparator<Employee> comparator = map.get(spinnerSort.getSelectedItem().toString());
 
         employeeArrayList = firm.getAllEmployeesSorted(comparator);
-        String[] arrayEmployee = new String[employeeArrayList.size()];
-        for (int i = 0; i < employeeArrayList.size(); i++) {
-            arrayEmployee[i] = employeeArrayList.get(i).toString() + employeeArrayList.get(i).getClass().getSimpleName();
-        }
-        adapterList = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1, arrayEmployee);
-        listViewEmployee.setAdapter(adapterList);
+        updateListAdapter(employeeArrayList);
     }
 
     private void onClickAlertDialog(final Employee employee) {
         Context context = getActivity();
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
 
-        alertDialog.setPositiveButton("Fire Employee", new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton(ParentFragment.MESSAGE, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 onClickFireEmployee(employee);
-
             }
         });
 
         alertDialog.show();
-
-//        alertDialog.setNegativeButton("Change Department", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//
-//            }
-//        });
     }
 }

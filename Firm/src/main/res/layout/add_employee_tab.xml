@@ -91,34 +91,42 @@
                 android:layout_height="wrap_content"
                 android:text="@string/rButtonMan"
                 android:id="@+id/rButtonMan"
-                android:textColor="#ffffff" android:textSize="18dp"/>
+                android:textColor="#ffffff"
+                android:textSize="18dp"/>
         <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/rButtonWoman"
                 android:id="@+id/rButtonWoman"
-                android:textColor="#ffffff" android:textSize="18dp"/>
+                android:textColor="#ffffff"
+                android:textSize="18dp"/>
     </RadioGroup>
     <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/department"
-            android:layout_below="@+id/radioGroup" android:layout_toEndOf="@+id/textViewDep"/>
+            android:layout_below="@+id/radioGroup"
+            android:layout_toEndOf="@+id/textViewDep"
+            android:textSize="30sp"
+            android:textColor="#ffffff" />
     <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/typeEmployee"
-            android:layout_below="@+id/department" android:layout_alignParentEnd="true"
-            android:layout_alignStart="@+id/department"/>
+            android:layout_below="@+id/department"
+            android:layout_alignParentEnd="true"
+            android:layout_alignStart="@+id/department"
+            android:textSize="30sp"
+            android:textColor="#ffffff"/>
     <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/buttonAdd"
             android:id="@+id/buttonAddEmployee"
             android:layout_alignWithParentIfMissing="true"
-            android:layout_below="@+id/typeEmployee"
-            android:layout_centerHorizontal="true"
-            android:ems="20"/>
+            android:ems="20"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

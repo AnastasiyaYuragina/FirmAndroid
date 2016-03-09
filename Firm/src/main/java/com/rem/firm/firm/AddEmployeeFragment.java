@@ -97,7 +97,7 @@ public class AddEmployeeFragment extends Fragment {
     }
 
     private void onClickAddEmployee() {
-        String sex = null;
+        String sex = "";
         String name = editTextName.getText().toString();
         String surname = editTextSurname.getText().toString();
         String patronymic = editTextPatronymic.getText().toString();
@@ -107,41 +107,39 @@ public class AddEmployeeFragment extends Fragment {
         Employee employee;
         Manager manager;
         SalesManager salesManager;
+        boolean isAdded = false;
+        String message = "Employee successfully added";
+        String errorMessage = "Employee not add";
         if (radioButtonWoman.isChecked()) {
             sex = Employee.fWoman;
         } else if(radioButtonMan.isChecked()) {
             sex = Employee.fMan;
         }
+
         if (!name.isEmpty() && !surname.isEmpty() && !patronymic.isEmpty() &&
-                !salaryS.isEmpty() && !bankAccountS.isEmpty() && !sex.equals(null)) {
+                !salaryS.isEmpty() && !bankAccountS.isEmpty() && !sex.isEmpty()) {
 
             double salary = Double.parseDouble(salaryS);
             double bankAccount = Double.parseDouble(bankAccountS);
+
             if (spinnerTypeEmployee.getSelectedItem().equals(EMPLOYEE)) {
                 employee = new Employee(name, surname, patronymic, salary, bankAccount, sex, department);
-                if (firm.addEmployee(employee)) {
-                    messageToast("Employee successfully added");
-                } else {
-                    messageToast("Employee not add");
-                }
-
+                isAdded = firm.addEmployee(employee);
             } else if (spinnerTypeEmployee.getSelectedItem().equals(MANAGER)) {
                 manager = new Manager(name, surname, patronymic, salary, bankAccount, sex, department);
-                if (firm.addEmployee(manager)) {
-                    messageToast("Employee successfully added");
-                } else {
-                    messageToast("Employee not add");
-                }
+                isAdded = firm.addEmployee(manager);
             } else if (spinnerTypeEmployee.getSelectedItem().equals(SALES_MANAGER)) {
                 salesManager = new SalesManager(name, surname, patronymic, salary, bankAccount, sex, department);
-                if (firm.addEmployee(salesManager)) {
-                    messageToast("Employee successfully added");
-                } else {
-                    messageToast("Employee not add");
-                }
+                isAdded = firm.addEmployee(salesManager);
             }
+            if (isAdded) {
+                messageToast(message);
+            } else {
+                messageToast(errorMessage);
+            }
+
         } else {
-            messageToast("Employee not add");
+            messageToast(errorMessage);
         }
     }
 
