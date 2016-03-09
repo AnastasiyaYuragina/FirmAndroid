@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.*;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Anastasiya on 3/4/2016.
@@ -23,9 +21,7 @@ public class EmployeeFragment extends ParentFragment {
      */
     public static final String ARG_SECTION_NUMBER = "section_number";
     private Firm firm;
-    private Spinner spinnerSort;
     private ImageButton buttonUpdate;
-    private Map<String, Comparator<Employee>> map = new HashMap<String, Comparator<Employee>>();
     private ArrayList<Employee> employeeArrayList;
 
     /**
@@ -55,23 +51,8 @@ public class EmployeeFragment extends ParentFragment {
         buttonUpdate = (ImageButton) rootView.findViewById(R.id.imageButtonUpdate);
         spinnerSort = (Spinner) rootView.findViewById(R.id.spinnerSort);
 
-        map.put(ParentFragment.NAME, Employee.SORT_BY_NAME);
-        map.put(ParentFragment.SURNAME, Employee.SORT_BY_SURNAME);
-        map.put(ParentFragment.PATRONYMIC, Employee.SORT_BY_PATRONYMIC);
-        map.put(ParentFragment.SALARY, Employee.SORT_BY_SALARY);
-        map.put(ParentFragment.BANK_ACCOUNT, Employee.SORT_BY_BANK_ACCOUNT);
-        map.put(ParentFragment.SEX, Employee.SORT_BY_SEX);
-
-        Object[] mapKey = map.keySet().toArray();
-        String[] arrayMapKey = new String[mapKey.length];
-        for (int i = 0; i < mapKey.length; i++) {
-            arrayMapKey[i] = mapKey[i].toString();
-        }
-        ArrayAdapter<String> arrayAdapterSort = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, arrayMapKey);
-        arrayAdapterSort.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerSort.setAdapter(arrayAdapterSort);
+        updateSpinnerSort();
         spinnerSort.setPrompt("Sort");
-
         spinnerSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -82,7 +63,6 @@ public class EmployeeFragment extends ParentFragment {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-
 
         employeeArrayList = firm.getAllEmployees();
         updateListAdapter(employeeArrayList);

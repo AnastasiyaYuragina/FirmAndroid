@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.*;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Anastasiya on 3/4/2016.
@@ -26,8 +24,6 @@ public class DepartmentFragment extends ParentFragment {
     private Firm firm;
     private ImageButton imageButtonUpdateDep;
     private Spinner spinnerDep;
-    private Spinner spinnerSortDep;
-    private Map<String, Comparator<Employee>> map = new HashMap<String, Comparator<Employee>>();
     private ArrayList<Employee> employeeArrayList;
     private Department selectDep;
 
@@ -57,26 +53,12 @@ public class DepartmentFragment extends ParentFragment {
 
         imageButtonUpdateDep = (ImageButton) rootView.findViewById(R.id.imageButtonUpdateDep);
         spinnerDep = (Spinner) rootView.findViewById(R.id.spinnerDepartment);
-        spinnerSortDep = (Spinner) rootView.findViewById(R.id.spinnerSortDep);
+        spinnerSort = (Spinner) rootView.findViewById(R.id.spinnerSortDep);
         listViewEmployee = (ListView) rootView.findViewById(R.id.listViewEmployeeDep);
 
-        map.put(ParentFragment.NAME, Employee.SORT_BY_NAME);
-        map.put(ParentFragment.SURNAME, Employee.SORT_BY_SURNAME);
-        map.put(ParentFragment.PATRONYMIC, Employee.SORT_BY_PATRONYMIC);
-        map.put(ParentFragment.SALARY, Employee.SORT_BY_SALARY);
-        map.put(ParentFragment.BANK_ACCOUNT, Employee.SORT_BY_BANK_ACCOUNT);
-        map.put(ParentFragment.SEX, Employee.SORT_BY_SEX);
-
-        Object[] mapKey = map.keySet().toArray();
-        String[] arrayMapKey = new String[mapKey.length];
-        for (int i = 0; i < mapKey.length; i++) {
-            arrayMapKey[i] = mapKey[i].toString();
-        }
-        ArrayAdapter<String> arrayAdapterSort = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, arrayMapKey);
-        arrayAdapterSort.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerSortDep.setAdapter(arrayAdapterSort);
-        spinnerSortDep.setPrompt("Sort");
-        spinnerSortDep.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        updateSpinnerSort();
+        spinnerSort.setPrompt("Sort");
+        spinnerSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 sortDep();
@@ -132,7 +114,7 @@ public class DepartmentFragment extends ParentFragment {
     }
 
     private void sortDep() {
-        Comparator<Employee> comparator = map.get(spinnerSortDep.getSelectedItem().toString());
+        Comparator<Employee> comparator = map.get(spinnerSort.getSelectedItem().toString());
         selectDep = firm.getDepartmentByName(spinnerDep.getSelectedItem().toString());
 
         employeeArrayList = selectDep.getEmployeesFromDepSorted(comparator);
