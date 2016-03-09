@@ -107,8 +107,7 @@
             android:id="@+id/department"
             android:layout_below="@+id/radioGroup"
             android:layout_toEndOf="@+id/textViewDep"
-            android:textSize="30sp"
-            android:textColor="#ffffff" />
+            android:layout_marginTop="10dp"/>
     <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -116,8 +115,7 @@
             android:layout_below="@+id/department"
             android:layout_alignParentEnd="true"
             android:layout_alignStart="@+id/department"
-            android:textSize="30sp"
-            android:textColor="#ffffff"/>
+            android:layout_marginTop="10dp"/>
     <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -125,20 +123,22 @@
             android:id="@+id/buttonAddEmployee"
             android:layout_alignWithParentIfMissing="true"
             android:ems="20"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"/>
+            android:layout_below="@+id/typeEmployee" android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/textDepartment"
             android:id="@+id/textViewDep"
             android:layout_below="@+id/radioGroup" android:layout_alignParentStart="true"
-            android:layout_above="@+id/typeEmployee" android:textColor="#ffffff" android:textSize="14dp"/>
+            android:layout_above="@+id/typeEmployee" android:textColor="#ffffff" android:textSize="14dp"
+            android:layout_marginTop="10dp"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Type of employee"
             android:id="@+id/textView"
             android:textColor="#ffffff" android:textSize="14dp" android:layout_below="@+id/department"
-            android:layout_toStartOf="@+id/department" android:layout_above="@+id/buttonAddEmployee"/>
+            android:layout_toStartOf="@+id/department" android:layout_above="@+id/buttonAddEmployee"
+            android:layout_marginTop="10dp"/>
 </RelativeLayout>

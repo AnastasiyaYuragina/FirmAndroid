@@ -1,16 +1,15 @@
 package com.rem.firm.firm;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-
 import java.util.ArrayList;
 
 /**
  * Created by Anastasiya on 3/9/2016.
  */
 public class ParentFragment extends Fragment{
+
     private ArrayAdapter<String> adapterList;
     protected ListView listViewEmployee;
     protected static final String NAME = "name";
